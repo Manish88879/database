@@ -1,0 +1,124 @@
+.registration-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%;
+}
+  .headingStyle{
+    display: flex;
+    flex-direction: row;
+  }
+  .p{
+    margin-top: -2%;
+    color: #6D6D6D;
+    font-weight: 500;
+  }
+
+  .admin {
+    color: #D68B43;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 500;
+    font-size: 46px;
+    margin-right: 10px;
+  }
+  .reg {
+    color: black;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 500;
+    font-size: 46px;
+  }
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .input-group {
+    margin: 20px 100px;
+  }
+  
+  label {
+    margin-right: 5px;
+  }
+  input {
+    padding: 5px;
+    width: 150%; /* Adjust width as needed */
+    border: none; /* Remove default border */
+    border-bottom: 0.1px solid #9EA3A2; /* Add bottom border in grey color */
+    margin-right: 30px; /* Adjust margin as needed */
+    padding-bottom: 15px;
+    color: #706f6f;
+  }
+  input:focus {
+    outline: none; /* Remove default focus outline */
+    border-bottom: 1px solid #ccc; /* Maintain bottom border in grey color */
+  }
+
+  input::placeholder{
+    color: #9EA3A2;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+  }
+  
+  .belowButton {
+    font-weight: 400;
+    width: 40%;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .belowButton p{
+    margin-top: 1%;
+    font-size: 11px;
+    color: #6D6D6D;
+    font-weight: 400;
+    width: 60%;
+    align-items: center;
+    text-align: center;
+    margin-left: 20%;
+  }
+  .link {
+    color: #D68B43; /* Color of the links */
+    text-decoration: underline; /* Underline the links */
+    cursor: pointer;
+    margin-right: 3px; 
+    margin-left: 3px; /* Show pointer cursor on hover */
+  }
+  
+  .link:hover {
+    color: #6D6D6D; /* Change color on hover */
+  }
+
+  button{
+    background-color: #FDC58F;
+    border: none;
+    padding: 10px 70px;
+    font-weight: 600;
+  }
+  .otp-container {
+    display: flex;
+  }
+  
+  .otp-container input {
+    width: 20px; /* Adjust width as needed */
+    height: 10px; /* Adjust height as needed */
+    margin: 50px 4px; /* Adjust margin between input fields */
+    text-align: center; /* Center align text */
+    font-size: 16px; /* Adjust font size as needed */
+    width: 50px;
+    border-bottom: 1px solid black;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+  }
+  
+  input[type="number"]::-webkit-inner-spin-button, 
+  input[type="number"]::-webkit-outer-spin-button { /* Chrome, Safari */
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  

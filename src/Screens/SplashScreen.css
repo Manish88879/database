@@ -1,0 +1,17 @@
+.splash-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Makes sure the container takes up the full viewport height */
+  }
+  
+  .splash-logo {
+    max-width: 600px; /* Adjust the max-width as needed */
+  }
+  
+  .loading-text {
+    margin-top: 20px; /* Adjust the spacing between the logo and text */
+    font-size: 18px; /* Adjust the font size as needed */
+  }
+  

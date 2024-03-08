@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch, Routes } from 'react-router-dom';
+//import Home from './Home'; // Import your Home component
+import Splash from './Screens/SplashScreen'; // Import your Splash component
+import RegisterPage from './Screens/AuthScreen/RegisterPage/RegisterPage';
+import OtpPage from './Screens/AuthScreen/OtpPage/OtpPage';
+import SetupPassword from './Screens/AuthScreen/SetupPassword/SetupPassword';
+import HomePage from './Screens/Home/Home';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+        <Route path="/" element={<Splash />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/otpPage" element={<OtpPage />} />
+        <Route path="/setupPassword" element={<SetupPassword/>} />
+        <Route path="/homePage" element={<HomePage/>} />
+                  {/* <Route path="/home" component={Home} /> */}
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

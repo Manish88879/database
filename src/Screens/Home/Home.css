@@ -1,0 +1,32 @@
+.tableContainer{
+    /* overflow-x: auto; */
+    width:min-content;
+    height: 60vh;
+
+}
+
+table {
+    width: 88rem;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.204);
+    border-collapse: collapse;
+    border-radius: 10px;
+}
+
+th {
+    padding: 1rem;
+    background-color: #272727;
+    color: white;
+    text-align: left;
+}
+
+th:first-of-type {
+    border-top-left-radius: 10px;
+}
+th:last-of-type {
+    border-top-right-radius: 10px;
+}
+
+td{
+    padding: 1rem;
+}
