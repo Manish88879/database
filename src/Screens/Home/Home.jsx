@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import NavigationBar from "../../Components/NavigattionBar/NavigationBar";
 import {
   Chart as ChartJS,
@@ -86,10 +86,6 @@ const dataTable = [
 ];
 
 const columns = [
-{
-  Header: "ID",
-  accessor: "id"
-},
 {
   Header: "BROKER NAME",
   accessor: "brokerName"
@@ -280,7 +276,7 @@ const  Home = () => {
                 Brokers Count
               </div>
               <div style={{ alignItems: "center" }}>
-              <div style={{ fontSize: '30px', fontWeight: '700', color: '#393939', marginTop: '-4%' }}>{"56765"}</div>;
+              <div style={{ fontSize: '30px', fontWeight: '700', color: '#393939', marginTop: '-4%' }}>{"56765"}</div>
 
                 <div style={{ display: "flex", flexDirection: "row" , justifyContent: 'center' , alignItems: 'center' }}>
                   <div
@@ -304,8 +300,8 @@ const  Home = () => {
           </div>
         </div>
         <h2>Recent Brokers</h2>
-        <div className="tableContainer">
-        <table {...getTableProps()}>
+        <div className="tablesContainer">
+        <table className="homeTable" {...getTableProps()}>
         <thead>
           {headerGroups.map((hg) => (
             <tr {...hg.getHeaderGroupProps()}>
@@ -337,8 +333,8 @@ const  Home = () => {
         </table>
         </div>
         <h2>Leads Added</h2>
-        <div className="tableContainer">
-        <table {...getTableProps()}>
+        <div className="tablesContainer">
+        <table className="homeTable" {...getTableProps()}>
         <thead>
           {headerGroups.map((hg) => (
             <tr {...hg.getHeaderGroupProps()}>

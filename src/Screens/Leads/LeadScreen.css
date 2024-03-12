@@ -1,0 +1,30 @@
+.tableContainer {
+    /* padding: 1rem; */
+    overflow-x: auto;
+    height: 100vh;
+    padding: 10vh 3rem;
+}
+
+
+.leadTable {
+    width: 80rem;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.204);
+    border-collapse: collapse;
+    border-radius: 10px;
+
+}
+
+th {
+    padding: 1rem;
+    background-color: #272727;
+    color: white;
+    text-align: left;
+}
+
+td{
+    padding: 1rem;
+}
+
+/* Add this CSS to your PaymentScreen.css file */
+  
