@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import LogoImage from '../../assets/OptimaLeads.png';
 
-function Navbar() {
+function NavigationBar({tab}) {
   const [selectedTab , setSelectedTab ] = useState(0);
   return (
     <AppBar position="static"  elevation={5} >
@@ -13,19 +13,19 @@ function Navbar() {
           <img src={LogoImage} alt="Logo" style={{ position: 'absolute' ,  height: '80px', marginRight: '150px' , top: '27px' , left: '-55px' }} />
         </Link>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Typography onClick={() => {setSelectedTab(0)}} variant="h6" component={Link} to="/homePage" style={{ fontWeight: '500' , fontSize: '18px' , margin: '0 20px', textDecoration: 'none',  color: selectedTab == 0?  '#D68B43' : '#626262' , marginLeft: '150px' }}>
+          <Typography variant="h6" component={Link} to="/homePage" style={{ fontWeight: '500' , fontSize: '18px' , margin: '0 20px', textDecoration: 'none',  color: tab == 0?  '#D68B43' : '#626262' , marginLeft: '160px' , backgroundColor: tab == 0 ?  '#FFFFFF' : '#F8F8F8', paddingInline: '20px' , paddingBlock: '10px' , borderRadius: '50px'}}>
             Home
           </Typography>
-          <Typography onClick={() => {setSelectedTab(1)}} variant="h6" component={Link} to="/PaymentScreen" style={{fontSize: '18px' , margin: '0 30px', textDecoration: 'none', color: '#626262' }}>
+          <Typography  variant="h6" component={Link} to="/PaymentScreen" style={{fontSize: '18px' , margin: '0 15px', textDecoration: 'none', color:tab == 1?  '#D68B43' :  '#626262' ,backgroundColor: tab == 1 ?  '#FFFFFF' : '#F8F8F8',paddingInline: '20px' , paddingBlock: '10px' , borderRadius: '50px'}}>
             Payments
           </Typography>
-          <Typography onClick={() => {setSelectedTab(2)}} variant="h6" component={Link} to="/BrokerScreen" style={{fontSize: '18px' , margin: '0 30px', textDecoration: 'none', color: '#626262' }}>
+          <Typography  variant="h6" component={Link} to="/BrokerScreen" style={{fontSize: '18px' , margin: '0 15px', textDecoration: 'none', color: tab == 2?  '#D68B43' :  '#626262' ,backgroundColor: tab == 2 ?  '#FFFFFF' : '#F8F8F8', paddingInline: '20px' , paddingBlock: '10px' , borderRadius: '50px'}}>
             Brokers
           </Typography>
-          <Typography onClick={() => {setSelectedTab(3)}} variant="h6" component={Link} to="/LeadScreen" style={{fontSize: '18px' , margin: '0 30px', textDecoration: 'none', color: '#626262' }}>
+          <Typography  variant="h6" component={Link} to="/LeadScreen" style={{fontSize: '18px' , margin: '0 15px', textDecoration: 'none', color:tab == 3?  '#D68B43' :  '#626262' , backgroundColor: tab == 3 ?  '#FFFFFF' : '#F8F8F8', paddingInline: '20px' , paddingBlock: '10px' , borderRadius: '50px'}}>
             Leads
           </Typography>
-          <Typography onClick={() => {setSelectedTab(4)}} variant="h6" component={Link} to="/ProfileScreen" style={{fontSize: '18px' , margin: '0 30px', textDecoration: 'none', color: '#626262' }}>
+          <Typography  variant="h6" component={Link} to="/ProfileScreen" style={{fontSize: '18px' , margin: '0 15px', textDecoration: 'none', color:tab == 4?  '#D68B43' :  '#626262' , backgroundColor: tab == 4 ?  '#FFFFFF' : '#F8F8F8', paddingInline: '20px' , paddingBlock: '10px' , borderRadius: '50px'}}>
             Profile
           </Typography>
         </div>
@@ -38,4 +38,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default NavigationBar;

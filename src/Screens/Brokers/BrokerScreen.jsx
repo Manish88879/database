@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavigationBar from "../../Components/NavigattionBar/NavigationBar";
 import {
   Chart as ChartJS,
@@ -12,253 +12,327 @@ import {
   Filler,
   Legend,
 } from "chart.js";
-import { useTable } from "react-table";
+import { useFilters, useGlobalFilter, usePagination, useTable } from "react-table";
 import "./BrokerScreen.css";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Footer from "../../Components/Footer/Footer";
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import { useNavigate } from "react-router-dom";
+import AddBrokerModal from "../../Components/AddBrokerModal/AddBrokerModal";
 
 const dataTable = [
   {
     id: 1,
-    dateCreated: "12th Mar, 2024",
-    updatedOn: "12th Mar, 2024",
-    CustomerName: "Anette Black",
-    EmailId: "samuel@gmail.com",
-    contactNumber: "9635760241",
-    amount: "2000",
-    status: "paid",
-    image:
-      "https://i.pinimg.com/736x/d5/59/bd/d559bd5ffda47d35f8d5ce8de8d6f325.jpg",
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
   },
   {
     id: 2,
-    dateCreated: "12th Mar, 2024",
-    updatedOn: "12th Mar, 2024",
-    CustomerName: "Devon Lane ",
-    EmailId: "samuel@gmail.com",
-    contactNumber: "9635760241",
-    amount: "2000",
-    status: "paid",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShOzuvJFKoWOIjzPLTr05MH5JsPvrgRi85tpf2_hre4zE-NNbYcyGltk-T2SSQOtsnIkY&usqp=CAU",
+    brokerName: 'Jane Cooper',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
   },
   {
     id: 3,
-    dateCreated: "12th Mar, 2024",
-    updatedOn: "12th Mar, 2024",
-    CustomerName: "Courtney Henry",
-    EmailId: "samuel@gmail.com",
-    contactNumber: "9635760241",
-    amount: "2000",
-    status: "paid",
-    image:
-      "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
+    brokerName: 'Darlene Robertson',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
   },
   {
     id: 4,
-    dateCreated: "12th Mar, 2024",
-    updatedOn: "12th Mar, 2024",
-    CustomerName: "Esther Howard ",
-    EmailId: "samuel@gmail.com",
-    contactNumber: "9635760241",
-    amount: "2000",
-    status: "paid",
-    image:
-      "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
   },
   {
     id: 5,
-    dateCreated: "12th Mar, 2024",
-    updatedOn: "12th Mar, 2024",
-    CustomerName: "Floyd Miles",
-    EmailId: "samuel@gmail.com",
-    contactNumber: "9635760241",
-    amount: "2000",
-    status: "paid",
-    image:
-      "https://pics.craiyon.com/2023-10-25/b65f72d6d11a48c1bc560059cc36e31f.webp",
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
   },
   {
     id: 6,
-    dateCreated: "12th Mar, 2024",
-    updatedOn: "12th Mar, 2024",
-    CustomerName: "Samuel Jeff",
-    EmailId: "samuel@gmail.com",
-    contactNumber: "9635760241",
-    amount: "2000",
-    status: "paid",
-    image:
-      "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
   },
   {
     id: 7,
-    dateCreated: "12th Mar, 2024",
-    updatedOn: "12th Mar, 2024",
-    CustomerName: "Samuel Jeff",
-    EmailId: "samuel@gmail.com",
-    contactNumber: "9635760241",
-    amount: "2000",
-    status: "paid",
-    image:
-      "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
   },
   {
     id: 8,
-    dateCreated: "12th Mar, 2024",
-    updatedOn: "12th Mar, 2024",
-    CustomerName: "Anette Black",
-    EmailId: "samuel@gmail.com",
-    contactNumber: "9635760241",
-    amount: "2000",
-    status: "paid",
-    image:
-      "https://i.pinimg.com/736x/d5/59/bd/d559bd5ffda47d35f8d5ce8de8d6f325.jpg",
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
   },
   {
     id: 9,
-    dateCreated: "12th Mar, 2024",
-    updatedOn: "12th Mar, 2024",
-    CustomerName: "Devon Lane ",
-    EmailId: "samuel@gmail.com",
-    contactNumber: "9635760241",
-    amount: "2000",
-    status: "paid",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShOzuvJFKoWOIjzPLTr05MH5JsPvrgRi85tpf2_hre4zE-NNbYcyGltk-T2SSQOtsnIkY&usqp=CAU",
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
   },
   {
     id: 10,
-    dateCreated: "12th Mar, 2024",
-    updatedOn: "12th Mar, 2024",
-    CustomerName: "Courtney Henry",
-    EmailId: "samuel@gmail.com",
-    contactNumber: "9635760241",
-    amount: "2000",
-    status: "paid",
-    image:
-      "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
   },
   {
     id: 11,
-    dateCreated: "12th Mar, 2024",
-    updatedOn: "12th Mar, 2024",
-    CustomerName: "Esther Howard ",
-    EmailId: "samuel@gmail.com",
-    contactNumber: "9635760241",
-    amount: "2000",
-    status: "paid",
-    image:
-      "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
   },
   {
     id: 12,
-    dateCreated: "12th Mar, 2024",
-    updatedOn: "12th Mar, 2024",
-    CustomerName: "Floyd Miles",
-    EmailId: "samuel@gmail.com",
-    contactNumber: "9635760241",
-    amount: "2000",
-    status: "paid",
-    image:
-      "https://pics.craiyon.com/2023-10-25/b65f72d6d11a48c1bc560059cc36e31f.webp",
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
   },
   {
     id: 13,
-    dateCreated: "12th Mar, 2024",
-    updatedOn: "12th Mar, 2024",
-    CustomerName: "Samuel Jeff",
-    EmailId: "samuel@gmail.com",
-    contactNumber: "9635760241",
-    amount: "2000",
-    status: "paid",
-    image:
-      "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
   },
   {
     id: 14,
-    dateCreated: "12th Mar, 2024",
-    updatedOn: "12th Mar, 2024",
-    CustomerName: "Samuel Jeff",
-    EmailId: "samuel@gmail.com",
-    contactNumber: "9635760241",
-    amount: "2000",
-    status: "paid",
-    image:
-      "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
   },
+  {
+    id: 15,
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
+  },
+  {
+    id: 16,
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
+  },
+  {
+    id: 17,
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
+  },
+  {
+    id: 17,
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
+  },
+  {
+    id: 17,
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
+  },
+  {
+    id: 17,
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
+  },
+  {
+    id: 17,
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
+  },
+  {
+    id: 17,
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
+  },
+  {
+    id: 17,
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
+  },
+  {
+    id: 17,
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
+  },
+  {
+    id: 17,
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
+  },
+  {
+    id: 17,
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
+  },
+  {
+    id: 17,
+    brokerName: 'Samuel Jeff',
+    email: 'samuel@gmail.com',
+    location: 'Canada, USA, UK',
+    spent: '62,000',
+    contactNumber: '9635760241',
+    date: '12th Mar, 2024'
+  }
+
 ];
 
 const columns = [
   {
-    Header: "Date created",
-    accessor: "dateCreated",
+    Header: "BROKER NAME",
+    accessor: "brokerName"
   },
   {
-    Header: "Updated on",
-    accessor: "updatedOn",
+    Header: "EMAIL",
+    accessor: "email"
   },
   {
-    Header: "Customer Name",
-    accessor: "CustomerName", // Change accessor name
-    Cell: (
-      { row } // Render custom cell
-    ) => (
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <img
-          src={row.original.image}
-          alt="Customer"
-          style={{
-            marginRight: "5px",
-            alignItems: "center",
-            width: "30px",
-            height: "30px",
-            borderRadius: "50%", // Rounded corners
-            padding: "5px", // Padding
-          }}
-        />
-        {row.original.CustomerName} {/* Render customer name */}
-      </div>
-    ),
+    Header: "LOCATION",
+    accessor: "location"
   },
   {
-    Header: "Email Id",
-    accessor: "EmailId",
+    Header: "SPENT",
+    accessor: "spent"
   },
   {
-    Header: "Phone Number",
-    accessor: "contactNumber",
-    Cell: (
-      { row } // Render custom cell
-    ) => (
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <div style={{ marginRight: "4px" }}>+91</div>
-        {row.original.contactNumber} {/* Render customer name */}
-      </div>
-    ),
+    Header: "CONTACT NO",
+    accessor: "contactNumber"
   },
   {
-    Header: "Amount",
-    accessor: "amount",
-    Cell: (
-      { row } // Render custom cell
-    ) => (
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <div style={{ marginRight: "4px" }}>$</div>
-        {row.original.amount} {/* Render customer name */}
-      </div>
-    ),
-  },
-  {
-    Header: "Status",
-    accessor: "status",
-  },
-];
+    Header: "Date",
+    accessor: "date"
+  }
+  
+  ]
+  
+  
+  
 
 const BrokerScreen = () => {
-  const { getTableBodyProps, getTableProps, headerGroups, rows, prepareRow } =
-    useTable({
+  const navigator = useNavigate();
+  const [filterInput, setFilterInput] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { getTableBodyProps,
+    getTableProps,
+    headerGroups,
+    page,
+    prepareRow,
+    state,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    pageCount,
+    setGlobalFilter,
+  } = useTable(
+    {
       columns,
-      data: dataTable,
-    });
+      data : dataTable,
+      initialState: { pageIndex: 0 }, // Start from the first page
+    },
+    useFilters,
+    useGlobalFilter,
+    usePagination,
+  );
+
+  const handleFilterChange = (e) => {
+    const value = e.target.value || undefined;
+    setGlobalFilter(value);
+    setFilterInput(value);
+  };
+  
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -270,40 +344,86 @@ const BrokerScreen = () => {
     Filler,
     Legend
   );
+  const handleRowClick = (row) => {
+    console.log("Row clicked:" , row);
+    navigator('/BrokerDetailScreen');
+    // Add your logic here to handle row click
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    console.log("close ")
+    setIsModalOpen(false);
+  };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column',  overflowX: 'auto'  , height: '100vh' , backgroundColor:'#F8F8F8' }}>
-      <NavigationBar />
-      <div style={{ paddingInline: "3%" , paddingBottom: '5vh' , flex: 1,  backgroundColor: '#FFFFFF' , width: '80rem' , alignSelf: 'center' , marginTop: '5vh' , borderRadius: '20px' , marginBottom: '4vh'}}>
+      <NavigationBar tab={2}/>
+      <div style={{ paddingInline: "3%" , paddingBottom: '5vh' , flex: 1,  backgroundColor: '#FFFFFF' , width: '80rem' , alignSelf: 'center' , marginTop: '5vh' , borderRadius: '20px' , marginBottom: '5vh'}}>
+        <div style={{display: 'flex' , flexDirection: 'row' , alignItems: 'center' , justifyContent: 'space-between'}}>
         <h2>Brokers</h2>
-          <table {...getTableProps()}>
-            <thead>
-              {headerGroups.map((hg) => (
-                <tr {...hg.getHeaderGroupProps()}>
-                  {hg.headers.map((header) => (
-                    <th {...header.getHeaderProps()}>
-                      {header.render("Header")}
-                    </th>
+        <input
+          value={filterInput}
+          onChange={handleFilterChange}
+          placeholder={"Search Brokers by name"}
+          style={{ marginBottom: "1rem" , width: '25rem' , border: "1px solid #9E9E9E" ,paddingTop: '13px' , paddingLeft: '20px' , marginTop: '20px'}}
+        />
+        <div onClick={openModal} style={{ display: 'flex', height: '20px', left: '10%', paddingInline: '15px', paddingBlock: '10px', alignItems: 'center' , border: '1px solid #AEAEAE' }}>
+      <PlaylistAddIcon style={{ marginInline: '5px', height: '25px' , color: '#21272A' }} />
+      <div>Add Broker</div>
+      
+      </div>
+        </div>
+        <AddBrokerModal isOpen={isModalOpen} onClose={closeModal}  />
+        <table {...getTableProps()}>
+          <thead>
+            {headerGroups.map((hg) => (
+              <tr {...hg.getHeaderGroupProps()}>
+               
+                {hg.headers.map((header) => (
+                  <th {...header.getHeaderProps()}>
+                    {header.render("Header")}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            
+            {page.map((row) => {
+              prepareRow(row);
+
+              return (
+                <tr {...row.getRowProps()}
+                onClick={() => handleRowClick(row)}
+                style={{ backgroundColor: row.isHovered? 'red' : 'transparent' }}
+                >
+                  {row.cells.map((cell) => (
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   ))}
                 </tr>
-              ))}
-            </thead>
-            <tbody {...getTableBodyProps()}>
-              {rows.map((row) => {
-                prepareRow(row);
-
-                return (
-                  <tr {...row.getRowProps()}>
-                    {row.cells.map((cell) => (
-                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                    ))}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+              );
+            })}
+          </tbody>
+        </table>
         
-      
+        <div style={{  display: "flex", justifyContent: "center" , alignItems: 'center'  , marginTop: '20px'}}>
+          <span style={{border: "1px solid #C4CDD5" ,display: 'flex' ,backgroundColor: canPreviousPage ? '#919EAB' : 'white'  , borderRadius: '6px' , paddingInline: '5px' , paddingBlock: '7px' , alignItems: 'center' , justifyContent: 'center' , marginRight: '10px'}} onClick={() => previousPage()} disabled={!canPreviousPage}>
+            <ArrowBackIosIcon style={{marginLeft: '8px' , color: '#C4CDD5'}} />
+          </span>{" "}
+          <span>
+            Page{" "}
+            <strong>
+              {state.pageIndex + 1} of {pageOptions.length}
+            </strong>{" "}
+          </span>
+          <span style={{ border: "1px solid #C4CDD5" , marginLeft: '10px' , display: 'flex' ,backgroundColor: canNextPage ? '#919EAB' : 'white' , borderRadius: '6px' , paddingInline: '5px' , paddingBlock: '7px' , alignItems: 'center' , justifyContent: 'center'}} onClick={() => nextPage()} disabled={!canNextPage}>
+            <ArrowForwardIosIcon style={{marginLeft: '8px' , color: '#C4CDD5'}} />
+          </span>{" "}
+        </div>
       </div>
       <Footer style={{ marginTop: 'auto' }} />
     </div>

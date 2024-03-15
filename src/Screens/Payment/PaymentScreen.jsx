@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavigationBar from "../../Components/NavigattionBar/NavigationBar";
 import {
   Chart as ChartJS,
@@ -15,6 +15,8 @@ import {
 import { useTable } from "react-table";
 import "./PaymentScreen.css";
 import Footer from "../../Components/Footer/Footer";
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import AddLeadsModal from "../../Components/AddLeadsModal/AddLeadsModal";
 
 const dataTable = [
   {
@@ -259,6 +261,7 @@ const PaymentScreen = () => {
       columns,
       data: dataTable,
     });
+  const [isModalOpen, setIsModalOpen] = useState(false);
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -271,11 +274,27 @@ const PaymentScreen = () => {
     Legend
   );
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column',  overflowX: 'auto'  , height: '100vh' , backgroundColor:'#F8F8F8' }}>
-      <NavigationBar />
+      <NavigationBar tab={1} />
       <div style={{ paddingInline: "3%" , paddingBottom: '5vh' , flex: 1,  backgroundColor: '#FFFFFF' , width: '80rem' , alignSelf: 'center' , marginTop: '5vh' , borderRadius: '20px' , marginBottom: '4vh'}}>
+      <div style={{display: 'flex' , flexDirection: 'row' , justifyContent: 'space-between'  , alignItems: 'center'}}>
         <h2>Payments</h2>
+        <div onClick={openModal} style={{ display: 'flex', height: '20px', left: '50%', paddingInline: '15px', paddingBlock: '10px', alignItems: 'center' , border: '1px solid #AEAEAE' }}>
+      <PlaylistAddIcon style={{ marginInline: '5px', height: '25px' , color: '#21272A' }} />
+      <div>Create Record</div>
+      </div>
+      </div>
+      <AddLeadsModal isOpen={isModalOpen} onClose={closeModal} />
           <table className="paymentTable" {...getTableProps()}>
             <thead>
               {headerGroups.map((hg) => (

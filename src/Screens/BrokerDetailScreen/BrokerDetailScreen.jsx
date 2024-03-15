@@ -4,22 +4,24 @@ import Footer from '../../Components/Footer/Footer'
 import ModeOutlinedIcon from '@mui/icons-material/ModeOutlined';
 import LaunchOutlinedIcon from '@mui/icons-material/LaunchOutlined';
 import TextSnippetOutlinedIcon from '@mui/icons-material/TextSnippetOutlined';
-import './ProfileScreen.css'
+import './BrokerDetailScreen.css'
+import { useNavigate } from 'react-router-dom';
 
-export default function ProfileScreen() {
+export default function BrokerDetailScreen() {
+    const navigate = useNavigate();
     useEffect(() => {
         console.log("Welcome to the Profile Screen")
     })
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' , backgroundColor: '#F8F8F8' }}>
-      <NavigationBar tab={4}/>
+      <NavigationBar tab={2}/>
       <div style={{backgroundColor: '#FFFFFF' , width: '82%' , height: '100vh' ,  marginTop: '50px', marginBottom: '50px' , borderRadius: '10px' , paddingInline: '80px' , paddingBlock: '8px' ,  }}>
         
         <div style={{ display: 'flex' , flexDirection: 'row' }}>
             {/* Left Part */}
             <div style={{  width: '100%', display: 'flex', flexDirection: 'column' }}>
   <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '14vh', marginRight: '10%' }}>
-    <h2 style={{ whiteSpace: 'nowrap' , fontWeight: '500' }}>Your Profile</h2>
+    <h2 style={{ whiteSpace: 'nowrap' , fontWeight: '500' }}>Boker/Samuel</h2>
     <div style={{ marginLeft: '25px', whiteSpace: 'nowrap' , fontSize: '13px' , color: '#333333' }}>Last Modified: 18/03/2023</div>
     <div style={{ display: 'flex', position: 'absolute', height: '20px', backgroundColor: '#f2dcc6', left: '50%', paddingInline: '15px', paddingBlock: '5px', alignItems: 'center' }}>
       <ModeOutlinedIcon style={{ marginInline: '2px', height: '15px' }} />

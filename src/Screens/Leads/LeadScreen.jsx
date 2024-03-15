@@ -273,7 +273,7 @@ const LeadScreen = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column',  overflowX: 'auto'  , height: '100vh' , backgroundColor:'#F8F8F8' }}>
-      <NavigationBar />
+      <NavigationBar tab={3} />
       <div style={{ paddingInline: "3%" , paddingBottom: '5vh' , flex: 1,  backgroundColor: '#FFFFFF' , width: '80rem' , alignSelf: 'center' , marginTop: '5vh' , borderRadius: '20px' , marginBottom: '4vh'}}>
         <h2>Leads</h2>
           <table className="leadTable" {...getTableProps()}>

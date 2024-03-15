@@ -10,6 +10,7 @@ import PaymentScreen from '../src/Screens/Payment/PaymentScreen';
 import BrokerScreen from './Screens/Brokers/BrokerScreen';
 import LeadScreen from './Screens/Leads/LeadScreen'; 
 import ProfileScreen from './Screens/ProfileScreen/ProfileScreen';
+import BrokerDetailScreen from './Screens/BrokerDetailScreen/BrokerDetailScreen'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/BrokerScreen" element={<BrokerScreen/>} />
         <Route path="/LeadScreen" element={<LeadScreen/>} />
         <Route path="/ProfileScreen" element={<ProfileScreen/>} />
+        <Route path="/BrokerDetailScreen" element={<BrokerDetailScreen/>} />
 
                   {/* <Route path="/home" component={Home} /> */}
         </Routes>
